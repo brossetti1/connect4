@@ -25,6 +25,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # authenticate users, security features.
 gem 'devise'
+
+#adding bootstrap for frontend support
+gem 'bootstrap-sass', '~> 3.2.0'
+#autoprefixer automatically adds the proper vendor prefixes to your CSS code when it is compiled.
+gem 'autoprefixer-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

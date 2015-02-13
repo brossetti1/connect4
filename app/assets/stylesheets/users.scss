@@ -1,3 +1,19 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul {
+	list-style: none
+}
+
+ul.singed-in {
+  display: inline-flex
+}
+
+ul.singed-in li {
+  display: inline-block;
+}
+
+nav.navbar.navbar-default.navbar-inverse { 
+  margin-bottom: 0px;
+}
