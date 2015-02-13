@@ -1,0 +1,12 @@
+
+
+<% @users.each do |user| %>
+	<div style="border-style: solid;border-color: red;">
+	  <ul style="margin-top:40px;">
+	  	<h3> <%= user.username %> </h3>
+	  	<li><%= user.id %> </li>
+	  	<li><%= user.email %></li>
+	  </ul>
+	</div> 
+
+<% end %>
