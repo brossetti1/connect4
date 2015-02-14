@@ -37,26 +37,19 @@ def random_player
   User.find(User.pluck(:id).sample)
 end
 
-60.times do
-  Player.create()
 
-
-30.times do
-  Game.create(
-    current_player_id: random_player,
-    winner_id: random_player,
-    ##### make this the default value for state ####
-    state: { 0 => [0,1,2,3,4,5],
-             1 => [0,1,2,3,4,5],
-             2 => [0,1,2,3,4,5],
-             3 => [0,1,2,3,4,5],
-             4 => [0,1,2,3,4,5],
-             5 => [0,1,2,3,4,5],
-             6 => [0,1,2,3,4,5] })
+70.times do |x|
+  player1 = random_player
+  player2 = random_player
+  game = Game.new()
+  game.users = [player1, player2]
+  game.save
+  x.even? ? game.winner_id = player1.id : game.winner_id = player2.id
 end
 
-
-
+Game.all.each do |game|
+  game.current_player_id = game.winner_id
+end
 
 
 

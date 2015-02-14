@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214062636) do
+ActiveRecord::Schema.define(version: 20150214184447) do
 
   create_table "games", force: :cascade do |t|
-    t.string   "state"
+    t.string   "state",             default: "---\n0:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n1:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n2:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n3:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n4:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n5:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n6:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n"
     t.integer  "current_player_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                                                                                                                                                                                                                                                        null: false
+    t.datetime "updated_at",                                                                                                                                                                                                                                                                        null: false
     t.integer  "winner_id"
-    t.boolean  "finished",          default: false, null: false
+    t.boolean  "finished",          default: false,                                                                                                                                                                                                                                                 null: false
     t.integer  "players_count"
     t.integer  "turn_count",        default: 42
   end

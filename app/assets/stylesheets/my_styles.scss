@@ -1,0 +1,16 @@
+nav.navbar.navbar-default.navbar-inverse { 
+  margin-bottom: 0px;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #FFF;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: #FFF;
+	display: inline-block;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+	color: #FFF;
+}
