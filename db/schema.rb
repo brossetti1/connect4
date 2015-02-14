@@ -11,15 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212200614) do
+ActiveRecord::Schema.define(version: 20150214062636) do
 
   create_table "games", force: :cascade do |t|
-    t.string   "player1"
-    t.string   "player2"
-    t.text     "state"
-    t.string   "current_player"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "state"
+    t.integer  "current_player_id"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "winner_id"
+    t.boolean  "finished",          default: false, null: false
+    t.integer  "players_count"
+    t.integer  "turn_count",        default: 42
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+  end
+
+  create_table "user_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "country"
+    t.string   "bitcoin_address"
+    t.string   "card_type"
+    t.datetime "expirey_date"
+    t.string   "card_number_last_four"
+    t.string   "favorite_color"
+    t.string   "blog"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,6 +56,9 @@ ActiveRecord::Schema.define(version: 20150212200614) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.integer  "wins"
+    t.integer  "losses"
+    t.integer  "ties"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
