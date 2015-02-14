@@ -4,40 +4,109 @@
 <!-- 
 <p>
   <strong>Player1:</strong>
-  <%= @game.player1 %>
+  <%#= @game.player1 %>
 </p>
 
 <p>
   <strong>Player2:</strong>
-  <%= @game.player2 %>
+  <%#= @game.player2 %>
 </p>
 
 <p>
   <strong>State:</strong>
-  <%= @game.state %>
+  <%#= @game.state %>
 </p>
 
 <p>
   <strong>Current player:</strong>
-  <%= @game.current_player %>
+  <%#= @game.current_player %>
 </p>
 
-
-
-
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<%#= link_to 'Edit', edit_game_path(@game) %> |
+<%#= link_to 'Back', games_path %>
  -->
 
-<div class="centered">
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
 
-    <%= image_tag "Connect4Board.png", :class => "center-block", :style => "margin-top: 80px;" %>
+
+
+<div class="container button-container">
+  <div class="button-div">
+    <div><button type="button" class="btn btn-warning">Play Col</button></div>
+    <div><button type="button" class="btn btn-warning">Play Col</button></div>
+    <div><button type="button" class="btn btn-warning">Play Col</button></div>
+    <div><button type="button" class="btn btn-warning">Play Col</button></div>
+    <div><button type="button" class="btn btn-warning">Play Col</button></div>
+    <div><button type="button" class="btn btn-warning">Play Col</button></div>
+    <div><button type="button" class="btn btn-warning">Play Col</button></div>
   </div>
-  <div class="col-md-1"></div>
 </div>
-</div>
+<div class="container center-block"> <!-- begin container board -->
+  <div class="row"> <!-- begin board row-->
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="padding-left: 95px;"> <!-- begin Connect4Board -->
+      <%= image_tag "Connect4Board.png", :class => "centered", :style => "margin-top: 40px;" %>
+    </div> <!-- end Connect4Board -->
+    <div class="col-md-1"></div>
+  </div> <!-- board row-->
+</div> <!-- end container board -->
 
+<div class="container spots">
+<div class="boxer center-block  board-table">
+  <div class="box-row">
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+  </div>
+  <div class="box-row">
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+  </div>
+  <div class="box-row">
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+  </div>
+  <div class="box-row">
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+  </div>
+  <div class="box-row">
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+  </div>
+  <div class="box-row">
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+  </div>
+    <div class="box-row">
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+    <div class="box">im here</div>
+  </div>
+</div>
+</div>

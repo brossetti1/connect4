@@ -2,11 +2,73 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#notice {
+	margin-bottom: 40px;
+}
+
+.container.button-container {
+  	margin-left: 210px;
+}
+
+.button-div div {
+  	display: inline-block;
+  	margin-left: 28px;
+}
+
 .centered {
-	position: fixed;
+	position: absolute;
 	top: 50%;
 	left: 50%;
 	/* -webkit-transform: translate(-50%, -50%); */
-	margin-top: -250px;
-	margin-left: -450px;
+	margin-top: 100px;
+	margin-left: -395px;
+}
+
+
+.centered-table {
+	position: absolute;
+	height: 791px;
+	width: 594px;
+	top: 50%;
+	left: 50%;
+	/* -webkit-transform: translate(-50%, -50%); */
+	margin-top: 100px;
+	margin-left: -395px;
+}
+
+.box {
+  	width: 87px;
+  	margin-left: 20px;
+  	background-color: red;
+}
+
+.box-row {
+  	display: inline-block;
+}
+
+.box-row div {
+  	padding: 25px;
+  	margin-top: 8px;
+}
+
+table.table.board-table {
+  	margin-bottom: 0px;
+}
+
+.board-table {
+  	width: 791px;
+  	margin-top: 43px;
+  	border-spacing: 1rem;
+  	height: 594px;
+}
+
+.table.board-table tr {
+
+}
+
+.board-table th {
+  	padding: 1rem;
+  	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
 }
