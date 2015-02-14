@@ -48,7 +48,9 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li> <%= link_to "Profile", user_profile_path(current_user) %> </li>
-          <li> <%= link_to "New Game", new_game_path %></li>
+          <li> <%= link_to "New Game", new_game_path %> 
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+          </li>
         <% end %>
         <li> <%= link_to "Top Scores", user_profiles_path %></li>
         <li> <%= render 'devise/menu/registration_items' %> </li>
@@ -60,9 +62,13 @@
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true"> <%= notice %> </span>
 </button>
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-  <span aria-hidden="true"> <%= alert %> </span>
-</button>
+
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div class="alert alert-danger" role="alert">
+    <span aria-hidden="true"> <%= alert %> </span>
+    </div>
+  </button>
+
 
 <%= yield %>
 
