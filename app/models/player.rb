@@ -8,11 +8,11 @@ end
 
 
 ###### activate associations #######
-# 
+#
 # player1 = User.find(4)
 # player2 = User.find(5)
 # game = Game.new
 # game.users = [player1, player2]
 # game.save
-# 
+#
 ####################################
