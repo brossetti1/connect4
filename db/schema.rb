@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214184447) do
+ActiveRecord::Schema.define(version: 20150215051107) do
 
   create_table "games", force: :cascade do |t|
-    t.string   "state",             default: "---\n0:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n1:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n2:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n3:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n4:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n5:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n6:\n- 0\n- 1\n- 2\n- 3\n- 4\n- 5\n"
+    t.string   "state",             default: "---\n1:\n- a1\n- a2\n- a3\n- a4\n- a5\n- a6\n2:\n- b1\n- b2\n- b3\n- b4\n- b5\n- b6\n3:\n- c1\n- c2\n- c3\n- c4\n- c5\n- c6\n4:\n- d1\n- d2\n- d3\n- d4\n- d5\n- d6\n5:\n- e1\n- e2\n- e3\n- e4\n- e5\n- e6\n6:\n- f1\n- f2\n- f3\n- f4\n- f5\n- f6\n7:\n- g1\n- g2\n- g3\n- g4\n- g5\n- g6\n"
     t.integer  "current_player_id"
-    t.datetime "created_at",                                                                                                                                                                                                                                                                        null: false
-    t.datetime "updated_at",                                                                                                                                                                                                                                                                        null: false
+    t.datetime "created_at",                                                                                                                                                                                                                                                                                                                  null: false
+    t.datetime "updated_at",                                                                                                                                                                                                                                                                                                                  null: false
     t.integer  "winner_id"
-    t.boolean  "finished",          default: false,                                                                                                                                                                                                                                                 null: false
+    t.boolean  "finished",          default: false,                                                                                                                                                                                                                                                                                           null: false
     t.integer  "players_count"
     t.integer  "turn_count",        default: 42
   end

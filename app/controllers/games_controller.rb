@@ -22,8 +22,8 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @user = User.find(user_params)
-    @game = Game.new(users: [current_user, @user], current_player_id: current_user.id)
+    @player2 = User.find(user_params)
+    @game = Game.new(users: [current_user, @player2], current_player_id: current_user.id)
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
