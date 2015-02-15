@@ -18,8 +18,8 @@ class Game < ActiveRecord::Base
     @board = $board
     @player1 = player1
     @player2 = player2
-    @player1token = 'red'
-    @player2token = 'black'
+    @player1token = 'r'
+    @player2token = 'b'
     @turns = 42
     @row = 1
     @col = 0
@@ -55,13 +55,41 @@ class Game < ActiveRecord::Base
 
   def winner?
     if verticalWin?(@row.to_i,@col.to_i) || horizontalWin?(@row.to_i,@col.to_i) ||
-        diagonalDownWin?(@row.to_i,@col.to_i)
+        diagonalDownWin?(@row.to_i,@col.to_i) || diagonalUpWin?(@row.to_i,@col.to_i)
         puts "#{@board[x][y]} won!!"
         return true
     else
       return false
     end
-    #|| diagonalUpWin?
+  end
+
+  def diagonalUpWin?(x,y)
+    if x<=4 && y>=3
+      if(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])&&(@board[x+2][y-2]==@board[x+3][y-3])
+        return true
+      end
+    end
+    if x>=4 && y<=3
+      if(@board[x][y]==@board[x-1][y+1])&&(@board[x-1][y+1]==@board[x-2][y+2])&&(@board[x-2][y+2]==@board[x-3][y+3])
+        return true
+      end
+    end
+    if x<=4 && y>=3
+      if(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])&&(@board[x+2][y-2]==@board[x+3][y-3])
+        return true
+      end
+    end
+    if x>=2 && x<=5 && y>=2 && y<=4
+      if(@board[x-1][y+1]==@board[x][y])&&(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])
+        return true
+      end
+    end
+    if x>=3 && x<=6 && y>=1 && y<=3
+      if(@board[x-2][y+2]==@board[x-1][y+1])&&(@board[x-1][y+1]==@board[x][y])&&(@board[x][y]==@board[x+1][y-1])
+        return true
+      end
+    end
+    return false
   end
 
   def diagonalDownWin?(x,y)
@@ -147,9 +175,7 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def diagonalUpWin?
-    #TODO:
-  end
+
 
 
 
@@ -216,5 +242,3 @@ class Game < ActiveRecord::Base
     show_board
   end
 end
-
-
