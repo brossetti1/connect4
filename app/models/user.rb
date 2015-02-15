@@ -11,8 +11,13 @@ class User < ActiveRecord::Base
   has_many :players
   has_many :games, through: :players
 
+
+  def self.order_by_wins
+    self.all.order('wins asc').reverse
+  end
+
+
   def prompt_user(prompt, validator, error_msg, clear_screen: nil)
-    `clear` if clear_screen
     puts "\n#{prompt}\n"
     result = gets.chomp
     until result =~ validator

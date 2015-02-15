@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-30.times do 
+50.times do 
  User.create(
   username: Faker::Internet.user_name,
   email: Faker::Internet.email,
@@ -38,7 +38,7 @@ def random_player
 end
 
 
-70.times do |x|
+100.times do |x|
   player1 = random_player
   player2 = random_player
   game = Game.new()

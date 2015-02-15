@@ -1,43 +1,94 @@
 <p id="notice"><%= notice %></p>
 
 
-<!-- 
-<p>
-  <strong>Player1:</strong>
-  <%= @game.player1 %>
-</p>
 
-<p>
-  <strong>Player2:</strong>
-  <%= @game.player2 %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @game.state %>
-</p>
-
-<p>
-  <strong>Current player:</strong>
-  <%= @game.current_player %>
-</p>
-
-
-
-
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
- -->
-
-<div class="centered">
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
-
-    <%= image_tag "Connect4Board.png", :class => "center-block", :style => "margin-top: 80px;" %>
+<div class="container button-container">
+  <div class="button-div">
+    <div> <%= button_to "Play Col", @game, class: "btn btn-warning", method: :patch, params: {column: '1'} %> </div>
+    <div> <%= button_to "Play Col", @game, class: "btn btn-warning", method: :patch, params: {column: '2'} %> </div>
+    <div> <%= button_to "Play Col", @game, class: "btn btn-warning", method: :patch, params: {column: '3'} %> </div>
+    <div> <%= button_to "Play Col", @game, class: "btn btn-warning", method: :patch, params: {column: '4'} %> </div>
+    <div> <%= button_to "Play Col", @game, class: "btn btn-warning", method: :patch, params: {column: '5'} %> </div>
+    <div> <%= button_to "Play Col", @game, class: "btn btn-warning", method: :patch, params: {column: '6'} %> </div>
+    <div> <%= button_to "Play Col", @game, class: "btn btn-warning", method: :patch, params: {column: '7'} %> </div>
   </div>
-  <div class="col-md-1"></div>
 </div>
-</div>
+<div class="container center-block"> <!-- begin container board -->
+  <div class="row"> <!-- begin board row-->
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="padding-left: 95px;"> <!-- begin Connect4Board -->
+      <%= image_tag "Connect4Board.png", :class => "centered", :style => "margin-top: 40px;" %>
+    </div> <!-- end Connect4Board -->
+    <div class="col-md-1"></div>
+  </div> <!-- board row-->
+</div> <!-- end container board -->
 
+<div class="container spots">
+  <div class="boxer center-block  board-table">
+    <div class="box-col">
+      <div class="box a1">im here</div>
+      <div class="box a2">im here</div>
+      <div class="box a3">im here</div>
+      <div class="box a4">im here</div>
+      <div class="box a5">im here</div>
+      <div class="box a6">im here</div>
+    </div> 
+    <div class="box-col">
+      <div class="box b1">im here</div>
+      <div class="box b2">im here</div>
+      <div class="box b3">im here</div>
+      <div class="box b4">im here</div>
+      <div class="box b5">im here</div>
+      <div class="box b6">im here</div>
+    </div>
+    <div class="box-col">
+      <div class="box c1">im here</div>
+      <div class="box c2">im here</div>
+      <div class="box c3">im here</div>
+      <div class="box c4">im here</div>
+      <div class="box c5">im here</div>
+      <div class="box c6">im here</div>
+    </div>
+    <div class="box-col">
+      <div class="box d1">im here</div>
+      <div class="box d2">im here</div>
+      <div class="box d3">im here</div>
+      <div class="box d4">im here</div>
+      <div class="box d5">im here</div>
+      <div class="box d6">im here</div>
+    </div>
+    <div class="box-col">
+      <div class="box e1">im here</div>
+      <div class="box e2">im here</div>
+      <div class="box e3">im here</div>
+      <div class="box e4">im here</div>
+      <div class="box e5">im here</div>
+      <div class="box e6">im here</div>
+    </div>
+    <div class="box-col">
+      <div class="box f1">im here</div>
+      <div class="box f2">im here</div>
+      <div class="box f3">im here</div>
+      <div class="box f4">im here</div>
+      <div class="box f5">im here</div>
+      <div class="box f6">im here</div>
+    </div>
+      <div class="box-col">
+      <div class="box g1">im here</div>
+      <div class="box g2">im here</div>
+      <div class="box g3">im here</div>
+      <div class="box g4">im here</div>
+      <div class="box g5">im here</div>
+      <div class="box g6">im here</div>
+    </div>
+    
+    
+    <!-- $board = {1=>["a1","a2","a3","a4","a5","a6"], -->
+    <!--          2=>["b1","b2","b3","b4","b5","b6"], -->
+    <!--          3=>["c1","c2","c3","c4","c5","c6"], -->
+    <!--          4=>["d1","d2","d3","d4","d5","d6"], -->
+    <!--          5=>["e1","e2","e3","e4","e5","e6"], -->
+    <!--          6=>["f1","f2","f3","f4","f5","f6"], -->
+    <!--          7=>["g1","g2","g3","g4","g5","g6"]} -->
+  </div>
+</div>
