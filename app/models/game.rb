@@ -35,13 +35,42 @@ class Game < ActiveRecord::Base
   def winner?(column)
     col_height = calculate_column_height(column)
     if verticalWin?(column.to_i, col_height.to_i) || horizontalWin?(column.to_i, col_height.to_i) ||
-        diagonalDownWin?(column.to_i, col_height.to_i)
+        diagonalDownWin?(column.to_i, col_height.to_i) || diagonalUpWin?(column.to_i, col_height.to_i)
         puts "#{self.state[x][y]} won!!"
         return true
     else
       return false
     end
     #|| diagonalUpWin?
+  end
+
+  def diagonalUpWin?(x,y)
+    if x<=4 && y>=3
+      if(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])&&(@board[x+2][y-2]==@board[x+3][y-3])
+        return true
+      end
+    end
+    if x>=4 && y<=3
+      if(@board[x][y]==@board[x-1][y+1])&&(@board[x-1][y+1]==@board[x-2][y+2])&&(@board[x-2][y+2]==@board[x-3][y+3])
+        return true
+      end
+    end
+    if x<=4 && y>=3
+      if(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])&&(@board[x+2][y-2]==@board[x+3][y-3])
+        return true
+      end
+    end
+    if x>=2 && x<=5 && y>=2 && y<=4
+      if(@board[x-1][y+1]==@board[x][y])&&(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])
+        return true
+      end
+    end
+    if x>=3 && x<=6 && y>=1 && y<=3
+      if(@board[x-2][y+2]==@board[x-1][y+1])&&(@board[x-1][y+1]==@board[x][y])&&(@board[x][y]==@board[x+1][y-1])
+        return true
+      end
+    end
+    return false
   end
 
   def diagonalDownWin?(x,y)
@@ -202,5 +231,3 @@ class Game < ActiveRecord::Base
   #  show_board
   #end
 end
-
-
