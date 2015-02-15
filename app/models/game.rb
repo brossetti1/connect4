@@ -22,16 +22,6 @@ class Game < ActiveRecord::Base
            # 6=>["f1","f2","f3","f4","f5","f6"],
            # 7=>["g1","g2","g3","g4","g5","g6"]}
 
-  #def update_board(spot)
-  #  if current_user.id == @game.current_player
-  #  end
-  #end
-
-  #def random_player_pick
-  #  rand(2) == 1 ? @user.user_id : current_user.id
-  #end
-
-
   def winner?(column)
     col_height = calculate_column_height(column)
     if verticalWin?(column.to_i, col_height.to_i) || horizontalWin?(column.to_i, col_height.to_i) ||
@@ -113,9 +103,10 @@ class Game < ActiveRecord::Base
       return false
     end
   end
-# x is columns and y is rows
-# x is input and y is calculated
-# x is @col and y is column
+
+  # x is columns and y is rows
+  # x is input and y is calculated
+  # x is @col and y is column
 
   def verticalWin?(x,y)
     if y <= 2
@@ -131,76 +122,64 @@ class Game < ActiveRecord::Base
     #TODO:
   end
 
-
-
-  def show_board
-    puts "\n
-         #{self.state[1][0]} | #{self.state[2][0]} | #{self.state[3][0]} | #{self.state[4][0]} | #{self.state[5][0]} | #{self.state[6][0]} | #{self.state[7][0]}
-          ---------------------------------------------
-         #{self.state[1][1]} | #{self.state[2][1]} | #{self.state[3][1]} | #{self.state[4][1]} | #{self.state[5][1]} | #{self.state[6][1]} | #{self.state[7][1]}
-          ---------------------------------------------
-         #{self.state[1][2]} | #{self.state[2][2]} | #{self.state[3][2]} | #{self.state[4][2]} | #{self.state[5][2]} | #{self.state[6][2]} | #{self.state[7][2]}
-          ---------------------------------------------
-         #{self.state[1][3]} | #{self.state[2][3]} | #{self.state[3][3]} | #{self.state[4][3]} | #{self.state[5][3]} | #{self.state[6][3]} | #{self.state[7][3]}
-          ---------------------------------------------
-         #{self.state[1][4]} | #{self.state[2][4]} | #{self.state[3][4]} | #{self.state[4][4]} | #{self.state[5][4]} | #{self.state[6][4]} | #{self.state[7][4]}
-          ---------------------------------------------
-         #{self.state[1][5]} | #{self.state[2][5]} | #{self.state[3][5]} | #{self.state[4][5]} | #{self.state[5][5]} | #{self.state[6][5]} | #{self.state[7][5]}
-          ---------------------------------------------
-
-      \n"
+  def place_token_on_board(column, token)
+    col_height = calculate_column_height(column)
+    self.state[column][col_height]= token
   end
 
-  def place_token_on_board(col, token)
-    col_height = calculate_column_height(col)
-    self.state[col][col_height]=token
-  end
-
-  def calculate_column_height(col)
+  def calculate_column_height(column)
     col_height = 5
-    while self.state[col][col_height].length!=2 && col_height >=0
+    column = column.to_i
+    while self.state[column][col_height].length!=2 && col_height >=0
       col_height -= 1
     end
     if col_height == -1
-      puts "Column is full."
-      pick_spot
+      #puts "Column is full."
+      #send alert
+      return false
     end
     col_height.to_i
   end
 
-  def pick_spot(column)
-    col = column.to_i
-    token = self.current_player_id == self.current_user.user_id ? 'red' : 'black'
-    place_token_on_board(col, token)
+  def update_spot(column)
+    column = column.to_i
+    token = self.current_player_id == self.players[0].user_id ? 'red' : 'black'
+    binding.pry
+    place_token_on_board(column, token)
   end
 
-  def take_turn
-    #puts "It is #{@next_player.username}'s turn."
-    #show_board
-    pick_spot
-    self.current_player_id = self.current_user.user_id == self.current_player_id ? player2.user_id : current_user.user_id
+  def pick_spot(column, user)
+    update_spot(column)
+    self.current_player_id = user.id == self.current_player_id ? player2.id : user.id
+    binding.pry
     self.turn_count -= 1
   end
 
-  def draw?
-    self.turn_count.zero? && !winner?
+  def draw?(column)
+    self.turn_count.zero? && !winner?(column)
   end
 
   def finished?(column)
-    draw? || winner?(column)
+    draw?(column) || winner?(column)
   end
 
   def player2
     self.users[1]
   end
 
-  #refactor to controller without a loop.
-  #def connect_four(column)
-  #  until finished?(column)
-  #    take_turn(column)
-  #  end
-  #  show_board
-  #end
+  def player_picking_currently
+    user_id = self.current_player_id
+    user = User.find(user_id)
+  end
+
+  def send_notice
+    "#{player_picking_currently.username}'s turn"
+  end
+
+  def send_alert
+    "you cant go there #{player_picking_currently.username}, pick again!"
+  end
+
 end
 
 
