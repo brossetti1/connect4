@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
   has_many :players
   has_many :games, through: :players
 
+
+  def self.order_by_wins
+    self.all.order('wins asc').reverse
+  end
+
 end
 
 
