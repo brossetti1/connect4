@@ -23,15 +23,16 @@ class Game < ActiveRecord::Base
            # 7=>["g1","g2","g3","g4","g5","g6"]}
 
   def winner?(column)
-    col_height = calculate_column_height(column)
-    if verticalWin?(column.to_i, col_height.to_i) || horizontalWin?(column.to_i, col_height.to_i) ||
-        diagonalDownWin?(column.to_i, col_height.to_i) || diagonalUpWin?(column.to_i, col_height.to_i)
-        puts "#{self.state[x][y]} won!!"
+    column = column.to_i
+    col_height = calculate_column_height(column) + 1
+    if verticalWin?(column, col_height) || 
+        horizontalWin?(column, col_height) ||
+        diagonalDownWin?(column, col_height) || 
+        diagonalUpWin?(column, col_height)
         return true
     else
       return false
     end
-    #|| diagonalUpWin?
   end
 
   def diagonalUpWin?(x,y)
@@ -147,41 +148,33 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def diagonalUpWin?
-    #TODO:
-  end
-
   def place_token_on_board(column, token)
     col_height = calculate_column_height(column)
-    self.state[column][col_height]= token
+    self.state[column][col_height] = token
+    self.save
   end
 
   def calculate_column_height(column)
     col_height = 5
-    column = column.to_i
     while self.state[column][col_height].length!=2 && col_height >=0
       col_height -= 1
     end
     if col_height == -1
-      #puts "Column is full."
-      #send alert
       return false
     end
     col_height.to_i
   end
 
-  def update_spot(column)
+  def pick_spot(column, user)
     column = column.to_i
     token = self.current_player_id == self.players[0].user_id ? 'red' : 'black'
-    binding.pry
     place_token_on_board(column, token)
+    self.switch_players(user)
+    self.turn_count -= 1
   end
 
-  def pick_spot(column, user)
-    update_spot(column)
+  def switch_players(user)
     self.current_player_id = user.id == self.current_player_id ? player2.id : user.id
-    binding.pry
-    self.turn_count -= 1
   end
 
   def draw?(column)
@@ -196,9 +189,24 @@ class Game < ActiveRecord::Base
     self.users[1]
   end
 
+  def winning_player_id
+    self.current_player_id == player2.id ? self.users[0].id : player2.id
+  end
+
   def player_picking_currently
     user_id = self.current_player_id
     user = User.find(user_id)
+  end
+
+  def winner
+    user_id = self.winner_id
+    User.find(user_id)
+  end
+
+  def process_finished_game
+    self.winner_id = self.winning_player_id
+    self.finished = true
+    winner
   end
 
   def send_notice
