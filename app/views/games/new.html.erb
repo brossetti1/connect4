@@ -14,7 +14,7 @@
   <% end %>
 
   <h2>Pick an opponent: </h2>
-  <%= User.order_by_wins.each do |user| %>
+  <% User.order_by_wins.each do |user| %>
     <% unless current_user.id == user.id %>
       <li>
         <span>player: <%= user.username %></span> |

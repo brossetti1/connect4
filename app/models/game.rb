@@ -25,9 +25,9 @@ class Game < ActiveRecord::Base
   def winner?(column)
     column = column.to_i
     col_height = calculate_column_height(column) + 1
-    if verticalWin?(column, col_height) || 
+    if verticalWin?(column, col_height) ||
         horizontalWin?(column, col_height) ||
-        diagonalDownWin?(column, col_height) || 
+        diagonalDownWin?(column, col_height) ||
         diagonalUpWin?(column, col_height)
         return true
     else
@@ -170,6 +170,7 @@ class Game < ActiveRecord::Base
     token = self.current_player_id == self.players[0].user_id ? 'red' : 'black'
     place_token_on_board(column, token)
     self.switch_players(user)
+    return process_finished_game if finished?(column)
     self.turn_count -= 1
   end
 

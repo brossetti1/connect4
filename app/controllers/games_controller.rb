@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, :only => [:destroy]
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :finished]
   #before_action :set_user, :only => [:update]
 
   # GET /games
@@ -39,12 +39,18 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1.json
   def update
     model_response = @game.pick_spot(column, current_user)
-    redirect_to game_finished_path(@game) if @game.finished?(column) #fix this to call finished action
+    # redirect_to game_finished_path(@game) if @game.finished?(column) #fix this to call finished action
     @game.save
     respond_to do |format|
-      if !!model_response
+      # if !!model_response
+      if model_response == @game.turn_count
         format.html { redirect_to @game, notice: @game.send_notice }
         format.json { render :show, status: :ok, location: @game }
+      elsif model_response == @game.winner
+        binding.pry
+        format.html { redirect_to game_finished_path(@game) }
+        format.json { render json: model_response}
+
       else
         format.html { render :show, alert: @game.send_alert }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -53,8 +59,9 @@ class GamesController < ApplicationController
   end
 
   def finished
-    binding.pry
-    @winner = @game.process_finished_game
+    # binding.pry
+    # @winner = @game.process_finished_game
+    @winner = @game.winner
     @game.save
     render :finished
   end
@@ -89,6 +96,3 @@ end
            # 5=>["e1","e2","e3","e4","e5","e6"],
            # 6=>["f1","f2","f3","f4","f5","f6"],
            # 7=>["g1","g2","g3","g4","g5","g6"]}
-
-
-
