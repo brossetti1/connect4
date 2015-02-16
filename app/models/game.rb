@@ -46,27 +46,27 @@ class Game < ActiveRecord::Base
 
   def diagonalUpWin?(x,y)
     if x<=4 && y>=3
-      if(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])&&(@board[x+2][y-2]==@board[x+3][y-3])
+      if(self.state[x][y]==self.state[x+1][y-1])&&(self.state[x+1][y-1]==self.state[x+2][y-2])&&(self.state[x+2][y-2]==self.state[x+3][y-3])
         return true
       end
     end
     if x>=4 && y<=3
-      if(@board[x][y]==@board[x-1][y+1])&&(@board[x-1][y+1]==@board[x-2][y+2])&&(@board[x-2][y+2]==@board[x-3][y+3])
+      if(self.state[x][y]==self.state[x-1][y+1])&&(self.state[x-1][y+1]==self.state[x-2][y+2])&&(self.state[x-2][y+2]==self.state[x-3][y+3])
         return true
       end
     end
     if x<=4 && y>=3
-      if(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])&&(@board[x+2][y-2]==@board[x+3][y-3])
+      if(self.state[x][y]==self.state[x+1][y-1])&&(self.state[x+1][y-1]==self.state[x+2][y-2])&&(self.state[x+2][y-2]==self.state[x+3][y-3])
         return true
       end
     end
     if x>=2 && x<=5 && y>=2 && y<=4
-      if(@board[x-1][y+1]==@board[x][y])&&(@board[x][y]==@board[x+1][y-1])&&(@board[x+1][y-1]==@board[x+2][y-2])
+      if(self.state[x-1][y+1]==self.state[x][y])&&(self.state[x][y]==self.state[x+1][y-1])&&(self.state[x+1][y-1]==self.state[x+2][y-2])
         return true
       end
     end
     if x>=3 && x<=6 && y>=1 && y<=3
-      if(@board[x-2][y+2]==@board[x-1][y+1])&&(@board[x-1][y+1]==@board[x][y])&&(@board[x][y]==@board[x+1][y-1])
+      if(self.state[x-2][y+2]==self.state[x-1][y+1])&&(self.state[x-1][y+1]==self.state[x][y])&&(self.state[x][y]==self.state[x+1][y-1])
         return true
       end
     end
