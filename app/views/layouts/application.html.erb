@@ -27,7 +27,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -48,7 +48,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li> <%= link_to "Profile", user_profile_path(current_user) %> </li>
-          <li> <%= link_to "New Game", new_game_path %> 
+          <li> <%= link_to "Show Games", games_path %> 
             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
           </li>
         <% end %>

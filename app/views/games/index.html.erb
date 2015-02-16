@@ -1,33 +1,69 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Listing Active Games</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Player1</th>
+            <th>Player2</th>
+            <th>Current player</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<h1>Listing Games</h1>
+        <tbody>
+          <% @games.each do |game| %>
+            <tr>
+              <td><%= game.users[0].username %></td>
+              <td><%= game.users[1].username %></td>
+              <td><%= game.current_player_id %></td>
+              <td><%= link_to 'Show', game %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<table>
-  <thead>
-    <tr>
-      <th>Player1</th>
-      <th>Player2</th>
-      <th>State</th>
-      <th>Current player</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <br>
+    </div>
 
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= game.player1 %></td>
-        <td><%= game.player2 %></td>
-        <td><%= game.state %></td>
-        <td><%= game.current_player %></td>
-        <td><%= link_to 'Show', game %></td>
-        <td><%= link_to 'Edit', edit_game_path(game) %></td>
-        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+    <div class="col-md-6">
+      <h1>Join a Game</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Player1</th>
+            <th>Player2</th>
+            <th>Current player</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<%= link_to 'New Game', new_game_path %>
+        <tbody>
+          <% @waiting.each do |game| %>
+            <tr>
+              <td><%= game.users[0].username %></td>
+              <td><%= game.current_player_id %></td>
+              <td><%= link_to 'Show', game %></td>
+              <td><%= link_to 'Join', join_game_path(game), method: :put %></td>
+
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<%= link_to 'New Game', {:action => :create}, :method => :post %>

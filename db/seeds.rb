@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-50.times do 
+50.times do
  User.create(
   username: Faker::Internet.user_name,
   email: Faker::Internet.email,
@@ -21,8 +21,8 @@ User.all.each do |user|
 end
 
 UserProfile.all.each do |profile|
-  profile.first_name = Faker::Name.first_name, 
-  profile.last_name = Faker::Name.last_name, 
+  profile.first_name = Faker::Name.first_name,
+  profile.last_name = Faker::Name.last_name,
   profile.country = Faker::Address.country,
   profile.bitcoin_address = Faker::Bitcoin.address,
   profile.card_type = Faker::Business.credit_card_type,
@@ -38,7 +38,7 @@ def random_player
 end
 
 
-100.times do |x|
+20.times do |x|
   player1 = random_player
   player2 = random_player
   game = Game.new()
@@ -47,10 +47,13 @@ end
   x.even? ? game.winner_id = player1.id : game.winner_id = player2.id
 end
 
-Game.all.each do |game|
-  game.current_player_id = game.winner_id
+
+User.all.sample(20).each do |user|
+  20.times do
+    Game.create(users: [user], current_player_id: user.id)
+  end
 end
 
-
-
-
+# Game.all.each do |game|
+#   game.current_player_id = game.winner_id
+# end

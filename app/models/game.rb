@@ -24,7 +24,7 @@ class Game < ActiveRecord::Base
 
   def winner?(column)
     column = column.to_i
-    col_height = calculate_column_height(column) + 1
+    col_height = calculate_column_height(column)
     if verticalWin?(column, col_height) ||
         horizontalWin?(column, col_height) ||
         diagonalDownWin?(column, col_height) ||
@@ -165,14 +165,23 @@ class Game < ActiveRecord::Base
     col_height.to_i
   end
 
+  # def pick_spot(column, user)
+  #   column = column.to_i
+  #   token = self.current_player_id == self.players[0].user_id ? 'red' : 'black'
+  #   place_token_on_board(column, token)
+  #   self.switch_players(user)
+  #   return process_finished_game if finished?(column)
+  #   self.turn_count -= 1
+  # end
+
   def pick_spot(column, user)
-    column = column.to_i
-    token = self.current_player_id == self.players[0].user_id ? 'red' : 'black'
-    place_token_on_board(column, token)
-    self.switch_players(user)
-    return process_finished_game if finished?(column)
-    self.turn_count -= 1
-  end
+   column = column.to_i
+   token = self.current_player_id == self.players[0].user_id ? 'red' : 'black'
+   place_token_on_board(column, token)
+   self.switch_players(user)
+   return process_finished_game(column) if finished?(column)
+   self.turn_count -= 1
+ end
 
   def switch_players(user)
     self.current_player_id = user.id == self.current_player_id ? player2.id : user.id
@@ -204,11 +213,19 @@ class Game < ActiveRecord::Base
     User.find(user_id)
   end
 
-  def process_finished_game
-    self.winner_id = self.winning_player_id
-    self.finished = true
-    winner
+  def process_finished_game(column)
+    if !draw?(column)
+       self.winner_id = self.winning_player_id
+       self.winner.update_attributes(wins: self.winner.wins += 1)
+       self.loser.update_attributes(losses: self.loser.losses += 1)
+     else
+       self.users.each {|user| user.update_attributes(ties: user.ties += 1)}
+     end
+     self.finished = true
+     true
   end
+
+
 
   def send_notice
     "#{player_picking_currently.username}'s turn"

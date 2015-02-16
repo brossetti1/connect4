@@ -1,17 +1,24 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, :only => [:destroy]
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :finished]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :finished, :join]
   #before_action :set_user, :only => [:update]
 
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.all.where(players_count: 2)
+    @waiting = Game.waiting
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+  end
+
+  def join
+    @game.users << current_user
+    redirect_to
+    @game
   end
 
   # GET /games/new
@@ -22,8 +29,8 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @player2 = User.find(user_params)
-    @game = Game.new(users: [current_user, @player2], current_player_id: current_user.id)
+    # @player2 = User.find(user_params)
+    @game = Game.new(users: [current_user], current_player_id: current_user.id)
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
