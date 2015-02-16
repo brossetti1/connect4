@@ -39,9 +39,8 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1.json
   def update
     model_response = @game.pick_spot(column, current_user)
-    redirect_to game_finished_path(@game) if @game.finished?(column)
+    redirect_to game_finished_path(@game) if @game.finished?(column) #fix this to call finished action
     @game.save
-    binding.pry
     respond_to do |format|
       if !!model_response
         format.html { redirect_to @game, notice: @game.send_notice }
@@ -51,6 +50,13 @@ class GamesController < ApplicationController
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def finished
+    binding.pry
+    @winner = @game.process_finished_game
+    @game.save
+    render :finished
   end
 
   private
