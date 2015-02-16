@@ -7,12 +7,12 @@
 }
 
 .container.button-container {
-  	margin-left: 210px;
+  margin-left: 210px;
 }
 
 .button-div div {
-  	display: inline-block;
-  	margin-left: 28px;
+  display: inline-block;
+  margin-left: 28px;
 }
 
 .centered {
@@ -36,30 +36,40 @@
 	margin-left: -395px;
 }
 
-.box {
-  	width: 87px;
-  	margin-left: 20px;
-  	background-color: red;
+.game {
+  width: 87px;
+  margin-left: 20px;
+  background-color: white;
+  height: 86px;
+  margin-bottom: 12px;
+}
+
+.game.red {
+  background-color: red;
+}
+
+.game.black {
+  background-color: black;
 }
 
 .box-col {
-  	display: inline-block;
+  display: inline-block;
 }
 
 .box-col div {
-  	padding: 25px;
-  	margin-top: 8px;
+  padding: 25px;
+  margin-top: 8px;
 }
 
 table.table.board-table {
-  	margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .board-table {
-  	width: 791px;
-  	margin-top: 43px;
-  	border-spacing: 1rem;
-  	height: 594px;
+  width: 791px;
+  margin-top: 43px;
+  border-spacing: 1rem;
+  height: 594px;
 }
 
 .table.board-table tr {
@@ -67,8 +77,8 @@ table.table.board-table {
 }
 
 .board-table th {
-  	padding: 1rem;
-  	white-space: nowrap;
-  	overflow: hidden;
-  	text-overflow: ellipsis;
+  padding: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

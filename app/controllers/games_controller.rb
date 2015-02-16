@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, :only => [:destroy]
   before_action :set_game, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, :only => []
+  #before_action :set_user, :only => [:update]
 
   # GET /games
   # GET /games.json
@@ -38,13 +38,16 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
-    row = @game.calculate_column_height(pick_params)
+    model_response = @game.pick_spot(column, current_user)
+    redirect_to game_finished_path(@game) if @game.finished?(column)
+    @game.save
+    binding.pry
     respond_to do |format|
-      if @game.update(state: [])
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+      if !!model_response
+        format.html { redirect_to @game, notice: @game.send_notice }
         format.json { render :show, status: :ok, location: @game }
       else
-        format.html { render :edit }
+        format.html { render :show, alert: @game.send_alert }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +60,8 @@ class GamesController < ApplicationController
     end
 
     def set_user
-      @user = @game.players
+      user_id = @game.current_player_id
+      @user = User.find(user_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
