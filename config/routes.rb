@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :user_profiles, only: [:index, :show]
   resources :games, except: [:edit, :destroy]
-  get 'games/:id/finished', :to => 'games#finsihed', as: 'game_finished'
+  get 'games/:id/finished', :to => 'games#finished', as: 'game_finished'
 
 
   devise_for :users, controllers: { registrations: 'users/registrations', passwords: 'users/passwords' }
