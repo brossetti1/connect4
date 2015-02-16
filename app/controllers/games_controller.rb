@@ -22,8 +22,8 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @user = User.find(user_params)
-    @game = Game.new(users: [current_user, @user], current_player_id: current_user.id)
+    @player2 = User.find(user_params)
+    @game = Game.new(users: [current_user, @player2], current_player_id: current_user.id)
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
@@ -38,8 +38,9 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
+    row = @game.calculate_column_height(pick_params)
     respond_to do |format|
-      if @game.update(pick_params)
+      if @game.update(state: [])
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
         format.json { render :show, status: :ok, location: @game }
       else
@@ -64,7 +65,7 @@ class GamesController < ApplicationController
       params.require(:player_id)
     end
 
-    def pick_params
+    def column
       params.require(:column)
     end
 
